@@ -1,21 +1,28 @@
 var socket = io();
-        //Esuchar sucesos
-        socket.on('connect', function () {
-            console.log('Conectado al servidor');
-        });
-        socket.on('disconnect', function () {
-            console.log('Desconectado del servidor');
-        });
-        //Enviar informacion
-        socket.emit('enviarMensaje', {
-            usuario: 'Jhon',
-            mensaje: 'Hola Mundo'
-        }, function (resp) {
-            console.log('Respuesta Server:  ', resp);
-        });
 
-        //Escuchar informacion
-        socket.on('enviarMensaje', function (mensaje) {
-            console.log('Servidor: ', mensaje);
+socket.on('connect', function() {
+    console.log('Conectado al servidor');
+});
 
-        })
+// escuchar
+socket.on('disconnect', function() {
+
+    console.log('Perdimos conexión con el servidor');
+
+});
+
+
+// Enviar información
+socket.emit('enviarMensaje', {
+    usuario: 'Fernando',
+    mensaje: 'Hola Mundo'
+}, function(resp) {
+    console.log('respuesta server: ', resp);
+});
+
+// Escuchar información
+socket.on('enviarMensaje', function(mensaje) {
+
+    console.log('Servidor:', mensaje);
+
+});
